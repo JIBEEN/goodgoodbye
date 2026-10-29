@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f8f1e5;
+  --color-envelope: #e8d4bb;
+  --color-ink: #6b5147;
+  --color-heart: #ca8290;
+  --color-brown: #b98d71;
+  --color-sage: #66785c;
+  --color-danger: #a34a5a;
+
+  --font-hand: "Nanum Pen Script", "Noto Sans KR", cursive;
+  --font-sans: "Noto Sans KR", system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
+}
+
+:root {
+  --lh: 30px;
+}
+
+html,
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100dvh;
+  overscroll-behavior-y: none;
+}
+
+/* 레이어 밖에 두면 Tailwind 유틸리티(text-white 등)보다 우선해 버리므로 base 레이어에 둔다. */
+@layer base {
+  button,
+  input,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+
+  button {
+    touch-action: manipulation;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-sage);
+    outline-offset: 2px;
+  }
+}
+
+/* 편지지: 본문 줄과 가로 줄무늬가 같은 간격으로 맞물린다. */
+.letter-lines {
+  font-size: 17px;
+  line-height: var(--lh);
+  background: linear-gradient(to bottom, transparent calc(var(--lh) - 1px), rgb(185 141 113 / 0.28) calc(var(--lh) - 1px))
+    0 0 / 100% var(--lh) local;
+}
+
+.safe-top {
+  padding-top: max(env(safe-area-inset-top), 0px);
+}
+.safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 0px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

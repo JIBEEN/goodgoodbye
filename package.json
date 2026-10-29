@@ -1,0 +1,35 @@
+{
+  "name": "goodgoodbye",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "e2e:fake": "node e2e/fake-supabase.mjs",
+    "e2e:api": "node e2e/api-test.mjs",
+    "e2e:ui": "node e2e/ui-test.cjs"
+  },
+  "dependencies": {
+    "@node-rs/argon2": "^2.2.2",
+    "@supabase/supabase-js": "^2.118.0",
+    "motion": "^14.7.1",
+    "next": "^16.4.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "server-only": "^0.0.1",
+    "sharp": "^0.35.5",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "postcss": "^8.5.32",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2"
+  }
+}
