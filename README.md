@@ -43,3 +43,16 @@ npm run build
 - **배경 사진:** DB 함수로 업로드 권한을 원자적으로 선점(2분 후 자동 만료) → Storage 저장 → 확정. 확정 뒤에는 DB 트리거가 경로 변경도 막습니다. 서버는 파일 실제 형식·디코딩을 검사하고, EXIF(위치 정보 등)를 제거한 1600px WebP로 저장합니다.
 - Vercel 서버리스 함수의 요청 본문 한도(약 4.5MB) 때문에, 브라우저가 업로드 전에 사진을 줄입니다(선택 가능한 원본은 10MB까지).
 - 글자 수(닉네임 20자, 본문 2000자)는 화면에 보이는 글자 기준이며 DB 제약은 안전망으로 더 느슨합니다.
+
+## E2E 테스트 (실제 Supabase 없이)
+
+`e2e/fake-supabase.mjs`는 Supabase(PostgREST·Storage)를 흉내 내는 테스트용 서버입니다. 규칙은 `0001_init.sql`과 같게 맞춰 두었습니다.
+
+```bash
+set -a; . e2e/env.sh; set +a        # 테스트용 환경변수
+npm run build && npx next start -p 3100 &
+npm run e2e:fake &                  # 가짜 Supabase (:54321)
+npm run e2e:api                     # API 28개 시나리오
+npm i -D playwright && npx playwright install chromium   # 최초 1회
+npm run e2e:ui                      # 모바일 화면 흐름 (스크린샷: e2e/.out/)
+```

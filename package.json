@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test tests/*.test.ts"
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "e2e:fake": "node e2e/fake-supabase.mjs",
+    "e2e:api": "node e2e/api-test.mjs",
+    "e2e:ui": "node e2e/ui-test.cjs"
   },
   "dependencies": {
     "@node-rs/argon2": "^2.2.2",
